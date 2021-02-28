@@ -1,0 +1,19 @@
+<% if logged_in? %>
+  <div class="row">
+    <div class="col-md-8">
+      <h3>Micropost Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+  </div>
+<% else %>
+<div class="center jumbotron">
+  <h1>Welcome to the SubTask App</h1>
+
+  <h2>
+    This is the home page for the Ruby on Rails SubTask Sample application
+  </h2>
+
+  <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to "Facebook login", '#', class: "btn btn-lg btn-primary facebook-btn" %>
+</div>
+<% end %>

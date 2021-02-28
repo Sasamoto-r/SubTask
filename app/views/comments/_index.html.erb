@@ -1,0 +1,58 @@
+<!-- コメント内容(２件) ------------------------------------------------------------------>
+<%= comments.count if comments %>件コメント
+<button class="more" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">もっと見る....</button>
+<% if comments %>
+<% comments.first(2).each do |comment| %>
+  <% unless comment.id.nil? %>
+    <li class="comment-container">
+        <div class="comment-box">
+            <div class="comment-text">
+                <section class="user_info">
+                  <%= render 'shared/user_info' %>
+                </section>
+                <div class="comment-entry">
+                    <%= comment.content %>
+                    <% if comment.user == current_user %>
+                        <%= link_to micropost_comment_path(comment.micropost_id, comment.id), method: :delete, remote: true, class: "comment_destroy" do %>
+                            <i class="fas fa-trash" style="color: black;">delete</i>
+                        <% end %>
+                    <% end %>
+                </div>
+                <span class="comment-date pull-right">
+                      <%= comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+                </span>
+            </div>
+        </div>
+    </li>
+    <% end %>
+  <% end %>
+<% end %>
+<!-- コメント内容(3件目以降) ------------------------------------------------------------------>
+    <div class="collapse" id="collapseExample">
+            <% if comments %>
+            <% comments.offset(2).each do |comment| %>
+              <% unless comment.id.nil? %>
+                <li class="comment-container">
+                    <div class="comment-box">
+                        <div class="comment-text">
+                            <section class="user_info">
+                              <%= render 'shared/user_info' %>
+                            </section>
+                            <div class="comment-entry">
+                                <%= comment.content %>
+                                <% if comment.user == current_user %>
+                                    <%= link_to micropost_comment_path(comment.micropost_id, comment.id), method: :delete, remote: true, class: "comment_destroy" do %>
+                                        <i class="fas fa-trash" style="color: black;"></i>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                            <span class="comment-date pull-right">
+                                  <%= comment.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+                <% end %>
+              <% end %>
+            <% end %>
+    </div>

@@ -1,0 +1,10 @@
+<div class="row">
+ <% if @posts.any? %>
+  <ol class="microposts">
+    <%= render @posts %>
+  </ol>
+ <% else %>
+   <p>検索結果なし</p>
+ <% end %>
+</div>
+
